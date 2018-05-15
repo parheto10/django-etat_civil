@@ -1,0 +1,68 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} Etat Civil | {{ extrait.nom }} {{ extrait.prenoms }} {% endblock %}</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div id="image" class="col-md-3">
+                <img src="{% static 'img/amoirie.png' %}" alt="" class="img-responsive" width="50" height="50">
+            </div>
+            <div class="col-md-9 text-capitalize text-center">
+                <h2 style="font-size: 14px"><strong>Extrait</strong><br>
+                    du Registre des actes de <br>
+                    l'Etat Civil pour l'année {{ extrait.annee }}
+                </h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3" style="font-size: 12px">
+                <p>de <span class="text-muted">LA COMMUNE DE {{ extrait.commune }}</span></p>
+                <p>centre de <span class="text-muted">{{ extrait.centre }}</span></p>
+                <p>N° <span class="text-danger text-muted">{{ extrait.numero_registre }} du registre</span></p>
+                <p class="text-center"><hr/></p>
+
+                <p class="text-left">
+                    NAISSANCE DE
+                </p>
+                <p class="text-danger">
+                    {{ extrait.nom }} {{ extrait.prenoms }}
+                </p>
+            </div>
+            <div class="col-md-9 text-right">
+                <p>le <span>{{ extrait.date_naiss }} à {{ extrait.heure_naiss }}</span></p>
+                <p>est ne <span>{{ extrait.prenoms }}</span></p>
+                <p>à <span>{{ extrait.maternite }}</span></p>
+                <p> Fils(le) de <span>{{ extrait.pere }} - {{ extrait.profession_pere }}</span></p>
+                <p> et de <span>{{ extrait.mere }} - {{ extrait.profession_mere }}</span></p>
+            </div>
+        </div>
+
+        <div class="col-md-12" style="font-size: 14px">
+            <p>Marié le {{ extrait.mariage }}......à {{ extrait.lieu_mariage }}</p>
+            <p>Nom et Prénoms Conjoint(e) {{ extrait.conjoint }}</p>
+            <p>Mariage dissous par décision de divorce en date du {{ extrait.divorce }}</p>
+            <p>Décédé le {{ extrait.deces }}......à {{ extrait.lieu_deces }}</p>
+            <p>Certifié le présent extrait conforme aux indications portées au registre</p>
+            <p class="text-right">Délivré à <span>Séguéla</span>, le <span>{% now  ''%}</span></p>
+            <br>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="text-left">Timbre</p>
+                    </div>
+
+                    <div class="col-md-6">
+                        <p class="text-right">Signature et Caché de l'autorité</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

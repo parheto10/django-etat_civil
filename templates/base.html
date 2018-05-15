@@ -1,0 +1,44 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>{% block title %}Etat Civil | {% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'font-awesome-4.7.0/css/font-awesome.min.css' %}">
+    <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    @page {
+    /* `size: auto` (the initial) is A4 portrait */
+    margin: 75px;
+    @top-left-corner     { text-align: right;  vertical-align:  middle }
+    @top-left            { text-align: left;   vertical-align:  middle }
+    @top-center          { text-align: center; vertical-align:  middle }
+    @top-right           { text-align: right;  vertical-align:  middle }
+    @top-right-corner    { text-align: left;   vertical-align:  middle }
+    @left-top            { text-align: center; vertical-align:  top    }
+    @left-middle         { text-align: center; vertical-align:  middle }
+    @left-bottom         { text-align: center; vertical-align:  bottom }
+    @right-top           { text-align: center; vertical-align:  top    }
+    @right-middle        { text-align: center; vertical-align:  middle }
+    @right-bottom        { text-align: center; vertical-align:  bottom }
+    @bottom-left-corner  { text-align: right;  vertical-align:  middle }
+    @bottom-left         { text-align: left;   vertical-align:  middle }
+    @bottom-center       { text-align: center; vertical-align:  middle }
+    @bottom-right        { text-align: right;  vertical-align:  middle }
+    @bottom-right-corner { text-align: left;   vertical-align:  middle }
+}
+</head>
+<body>
+
+    {% block content %}
+    {% endblock %}
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+</body>
+</html>
