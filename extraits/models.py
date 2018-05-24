@@ -15,6 +15,7 @@ Categorie = (
     ('ACTE DE NAISSANCES',(
         ("normal", "NORMAL"),
         ("mariage", "EN VUE DE MARIAGE"),
+        ("copie", "COPIE INTEGRALE / JUGEMENT SUPPLETIF"),
         )
      ),
     ('acte_mariage', 'ACTE DE MARIAGE'),
@@ -23,6 +24,9 @@ Categorie = (
 
 class Commune(models.Model):
     libelle = models.CharField(max_length=250, verbose_name="Commune")
+
+    def __unicode__(self):
+        return self.libelle
 
 class Mairie(models.Model):
     Commune    = models.ForeignKey(Commune)
@@ -38,7 +42,6 @@ class Mairie(models.Model):
         return self.Commune.libelle
 
 class Centre(models.Model):
-    #commune = models.ForeignKey(Mairie)
     libelle_centre = models.CharField(max_length=500, verbose_name="Centre de Santé")
     situation = models.CharField(max_length=500, verbose_name="Situation Geographique du Centre")
 
@@ -61,7 +64,7 @@ class Naissance(models.Model):
     numero_registre = models.CharField(max_length=150, verbose_name='Numero du Registre')
     annee = models.IntegerField(verbose_name='Annee de Naissance', choices=YEAR_CHOICES,
                                 default=datetime.datetime.now().year)
-    categorie = models.IntegerField(verbose_name='Type de Document', choices=Categorie)
+    categorie = models.CharField(max_length=150, verbose_name='Nature Document', choices=Categorie)
     #centre = models.ForeignKey(Centre)
 
     # informations recipiendaire
@@ -73,8 +76,8 @@ class Naissance(models.Model):
     hopital = models.ForeignKey(Centre)
 
     # parents
-    pere = models.CharField(max_length=250, verbose_name='Nom et Prénoms du Pere')
-    profession_pere = models.CharField(max_length=250, verbose_name='Profession du Pere')
+    pere = models.CharField(max_length=250, verbose_name='Nom et Prénoms du Pere', blank=True)
+    profession_pere = models.CharField(max_length=250, verbose_name='Profession du Pere', blank=True)
     mere = models.CharField(max_length=250, verbose_name='Nom et Prénoms de la Mere')
     profession_mere = models.CharField(max_length=250, verbose_name='Profession de la Mere')
     ajouter_le = models.DateTimeField(auto_now_add=True, auto_now=False)

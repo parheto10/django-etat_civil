@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import pdfkit
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -40,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'wkhtmltopdf',
 
     'extraits.apps.ExtraitsConfig',
 ]
@@ -134,6 +137,19 @@ STATIC_ROOT = (os.path.join(BASE_DIR, 'static', 'assets'))
 MEDIA_URL = "/media/"
 MEDIA_ROOT = (os.path.join(BASE_DIR, 'static', 'medias'))
 
+#wkhtmltopdf set options
+WKHTMLTOPDF_CMD_OPTIONS = {
+    'quiet': True,
+    'page-size': 'Letter',
+    'margin-top': '0.75in',
+    'margin-right': '0.75in',
+    'margin-bottom': '0.75in',
+    'margin-left': '0.75in',
+    'encoding': "UTF-8",
+    'no-outline': None
+}
+WKHTMLTOPDF_CMD = 'C:/Program Files/wkhtmltopdf/bin'
+#pdfkit.from_url('google.com', 'out.pdf', options=WKHTMLTOPDF_CMD_OPTIONS)
 
 WPADMIN = {
     'admin': {

@@ -2,6 +2,8 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render, get_object_or_404
+
+from etat_civil.settings import BASE_DIR
 from .models import Naissance
 from django.http import HttpResponse
 from django.template.loader import render_to_string, get_template
@@ -22,6 +24,17 @@ from weasyprint import HTML
 import tempfile
 from django.conf import settings
 import weasyprint
+
+options = {
+    'page-size': 'Letter',
+    'margin-top': '0.75in',
+    'margin-right': '0.75in',
+    'margin-bottom': '0.75in',
+    'margin-left': '0.75in',
+    'encoding': "UTF-8",
+    'no-outline': None
+}
+WKHTMLTOPDF_PATH = 'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe'
 
 """
 class Pdf(View):
@@ -96,6 +109,30 @@ def extrait_pdf(request, extrait_id):
                                  '/css/bootstrap.min.css')
         ])
     return response
+
+import pdfkit
+from django.http import HttpResponse
+
+def pdf(request, extrait_id):
+    config = pdfkit.configuration(wkhtmltopdf=WKHTMLTOPDF_PATH)
+    #config = pdfkit.configuration(wkhtmltopdf=WKHTMLTOPDF_PATH)
+    # Use False instead of output path to save pdf to a variable
+    extrait = get_object_or_404(Naissance, id = extrait_id)
+    output_path = (os.path.join(BASE_DIR, 'application/pdf'))
+    context = {'extrait': extrait}
+
+    pdf = pdfkit.from_url('templates/pdf/extrait.html', 'Documents/extrait.pdf', configuration=config, options=options)
+    response = HttpResponse(pdf, content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename = "extrait {} {}.pdf"' .format(extrait.nom, extrait.prenoms)
+    return response #HttpResponse("Everything working good, check out the root of your project to see the generated PDF.")
+
+
+    # pdf = pdfkit.from_file('templates/pdf/extrait.html', False)
+    # response = HttpResponse(pdf,content_type='application/pdf')
+    # response['Content-Disposition'] = 'attachment; filename="Extrait.pdf"'
+
+    #return response
+
 
 
 
