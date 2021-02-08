@@ -41,7 +41,7 @@ Faker==0.8.13
 funcsigs==1.0.2
 get==1.0.2
 html5lib==1.0.1
-httplib2==0.11.3
+httplib2==0.19.0
 idna==2.6
 ipaddress==1.0.22
 kiwisolver==1.0.1
