@@ -63,7 +63,7 @@ purl==1.4
 pycparser==2.18
 PyJWT==1.6.1
 pyparsing==2.2.0
-PyPDF2==1.26.0
+PyPDF2==1.27.5
 Pyphen==0.9.4
 python-dateutil==2.7.2
 python-openid==2.2.5
