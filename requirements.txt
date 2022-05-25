@@ -61,7 +61,7 @@ psycopg2-binary==2.7.4
 public==1.0.1
 purl==1.4
 pycparser==2.18
-PyJWT==1.6.1
+PyJWT==2.4.0
 pyparsing==2.2.0
 PyPDF2==1.26.0
 Pyphen==0.9.4
